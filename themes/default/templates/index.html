@@ -15,7 +15,7 @@
 {{entry.content_excerpt|safe}}
 </div>
 
-<div class="meta">{% if entry.strtags %}Tags: {%for tag in entry.tags%}<a href="/tag/{{tag|urlencode}}">{{tag}}</a> {%endfor%}<br><br>{%endif%}  Posted in {%for cate in entry.categories%} <a href="/category/{{cate.slug}}">{{cate.name}}</a> {%endfor%} | {%if self.is_admin%}<a href="{{entry.edit_url}}">Edit</a> | {%endif%}  <a href="/{{entry.link}}#comments">Comments({{entry.commentcount}})&#187;</a></div>
+<div class="meta">{% if entry.strtags %}标签: {%for tag in entry.tags%}<a href="/tag/{{tag|urlencode}}">{{tag}}</a> {%endfor%}<br><br>{%endif%}  分类 {%for cate in entry.categories%} <a href="/category/{{cate.slug}}">{{cate.name}}</a> {%endfor%} | {%if self.is_admin%}<a href="{{entry.edit_url}}">编辑</a> | {%endif%}  <a href="/{{entry.link}}#comments">评论({{entry.commentcount}})&#187;</a></div>
 </div>
 
 </div>
@@ -26,11 +26,7 @@
 <div class="ctop"></div>
 <div class="box">
 <div class="alignleft">{% if show_next %}<a href="/page/{{ pageindex|add:"1" }}">&laquo; Older Entries</a>{%endif%}</div>
-<div class="aligncenter">
-<script type="text/javascript" src="/static/js/pagenavi.js"></script>
-<script type="text/javascript">showPageLink("/page/",{{ pageindex }},{{ pagecount }},"");</script>
-</div>
-<div class="alignright">{% if show_prev %}<a href="/page/{{ pageindex|add:"-1" }}">Newer Entries &raquo;</a>{%endif%}</div>
+<div class="alignright">{% if show_prev %}<a href="/page/{{ pageindex|add:"-1" }}">&laquo; Newer Entries</a>{%endif%}</div>
 <div class="clear"></div></div>
 <div class="cbottom"></div>
 <div class="space"></div>
@@ -38,8 +34,8 @@
 {% else %}
 <div class="ctop"></div>
 <div class="box">
-<h2>Not Found</h2>
-<p>Sorry, but you are looking for something that isn't here.</p>
+<h2>err，出错了：页面没找着</h2>
+<p>很抱歉，没有找到您要访问的页面 :(</p>
 </div>
 <div class="clear"></div>
 <div class="cbottom"></div>

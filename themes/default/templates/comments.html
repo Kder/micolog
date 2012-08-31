@@ -1,8 +1,9 @@
 
 <!-- You can start editing here. -->
+
 {% if entry.allow_comment %}
 {% if entry.comments.count%}
-	<h3 id="comments">{{entry.comments.count}} Responses to &#8220;{{entry.title}}&#8221;</h3>
+	<h3 id="comments">{{entry.comments.count}} 回复 &#8220;{{entry.title}}&#8221;</h3>
 
 	<ol class="commentlist">
 
@@ -10,7 +11,7 @@
 
 		<li class="{%cycle alt1,alt %}" id="comment-{{comment.key.id}}">
 			<div class="gravatar"><img height="50" width="50" class="avatar avatar-50" src="{{comment.gravatar_url}}" alt=""/></div>
-			<div class="comments"><a href="{{comment.weburl}}" target="_blank">{{comment.author}}</a> On <small class="commentmetadata"><a href="#comment-{{comment.key.id}}" title="">{{comment.date.date|datetz:"Y-m-d"}} at {{comment.date|datetz:"H:i"}}</a> <a onclick="return backcomment('<a href=#comment-{{comment.key.id}}>{{comment.author}}</a>');" href="#commentarea"><span color="blue">Reply</span></a> </small>
+			<div class="comments"><a href="{{comment.weburl}}" target="_blank">{{comment.author}}</a> 于 <small class="commentmetadata"><a href="#comment-{{comment.key.id}}" title="">{{comment.date.date|datetz:"Y-m-d"}}  {{comment.date|datetz:"H:i"}}</a> </small>
 
 			<br />
 
@@ -29,9 +30,10 @@
 {%endif%}
 
 
-
+{% if blog.allow_comments %}
 <a name="commentarea"></a>
-<h3 id="respond">Leave a Reply</h3>
+
+<h3 id="respond">我来说两句</h3>
 <form action="/post_comment" method="post" id="commentform">
 <script type="text/javascript">
 function backcomment(msg){
@@ -41,16 +43,13 @@ return true;
 }
 </script>
 <p><input type="text" name="author" id="author" value="{{user_name}}" size="22" tabindex="1" />
-<label for="author">Name <span style="color:red">(*)</span></label></p>
+<label for="author">名字 <span style="color:red">(*)</span></label></p>
 
 <p><input type="text" name="email" id="email" value="{{user_email}}" size="22" tabindex="2" />
-<label for="email">Mail(will not be published) <span style="color:red">(*)</span></small></label></p>
+<label for="email">邮箱(保证不会公布您的邮件地址) <span style="color:red">(*)</span></small></label></p>
 
 <p><input type="text" name="url" id="url" value="{{user_url}}" size="22" tabindex="3" />
-<label for="url">Website</label></p>
-
-<p><input type="checkbox" name="reply_notify_mail" id="reply_notify_mail" checked="checked" size="45" tabindex="4" />
-<label for="reply_notify_mail">Send me reply notify mail</label></p>
+<label for="url">网址</label></p>
 
 {%ifequal blog.comment_check_type 1%}
 <p id="checkarea">
@@ -62,16 +61,16 @@ return true;
 {%ifequal blog.comment_check_type 2%}
 <div id="checkarea" style="padding-bottom:15px">
 
-<div style="float:left;margin-right:8px;"><label for="checkret"><small>Checkcode:</small></label>
-<input type="text" name="checkret" id="checkret" value="" size="5" tabindex="5" />
+<div style="float:left;margin-right:8px;"><label for="checkret"><small>验证码:</small></label>
+<input type="text" name="checkret" id="checkret" value="" size="5" tabindex="4" />
 </div>
 <img id='checkimg' src='/checkimg/' style="border:0px;padding:0px;" title='Click to change image' onclick="reloadCheckImage();"/>
 </div>
 {%endifequal%}
 
-<p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="6"></textarea></p>
+<p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
 
-<p><input name="submit" type="submit"  id="submit" tabindex="7" value="Submit Comment" />
+<p><input name="submit" type="submit"  id="submit" tabindex="5" value="好了，就说这些" />
 </p>
 <input type="hidden" name="key" value="{{entry.key}}" />
 </form>
@@ -80,15 +79,15 @@ return true;
     commentuser=$.cookie('comment_user');
        if (commentuser)
        {
-        //[user,email,url]=commentuser.split('#@#');
-        var tuple=commentuser.split('#@#');
+         //[user,email,url]=commentuser.split('#@#');
+         var tuple=commentuser.split('#@#');
         var user,email,url;
         user=tuple[0];
         email=tuple[1];
         url=tuple[2];
-        $('#author').val(user);
-        $('#email').val(email);
-        $('#url').val(url);
+         $('#author').val(user);
+         $('#email').val(email);
+         $('#url').val(url);
        }
 
   $('#commentform').submit(function(){
@@ -98,13 +97,13 @@ return true;
 
       			 if (!form.author.value)
           		 {
-          		  alert('Please input your name.');
+          		  alert('请留下您的大名:)');
           		  form.author.focus();
           		  return false;
           		 }
           		 if (!form.email.value)
           		 {
-          		 	alert('Please input the email address.');
+          		 	alert('邮件地址没写？');
           		 	form.email.focus();
           		 	return false;
           		 }
@@ -112,7 +111,7 @@ return true;
 
       		 if (!form.comment.value)
       		 {
-      		 	alert('Please leave some reply message.');
+      		 	alert('别什么也不说啊~');
       		 	form.comment.focus();
       		 	return false;
       		 }
@@ -120,7 +119,8 @@ return true;
       		 return true;
   });
 </script>
+{% endif %}
 
 {% else %}
-<p class="nocomments">评论关闭</p>
+<p class="nocomments">评论已关闭</p>
 {% endif %}

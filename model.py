@@ -179,6 +179,7 @@ class Blog(db.Model):
     sitemap_ping=db.BooleanProperty(default=False)
     default_link_format=db.StringProperty(default='?p=%(post_id)s')
     default_theme=Theme()
+    allow_comments=db.BooleanProperty(default=False)
     allow_pingback=db.BooleanProperty(default=False)
     allow_trackback=db.BooleanProperty(default=False)
     admin_essential=db.BooleanProperty(default=False)
@@ -855,12 +856,14 @@ def InitBlogData():
     g_blog.baseurl="http://"+g_blog.domain
     g_blog.feedurl=g_blog.baseurl+"/feed"
     os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+    g_blog.allow_comments=False
     g_blog.admin_essential = False
     if os.environ.has_key('HTTP_ACCEPT_LANGUAGE'):
         lang=os.environ['HTTP_ACCEPT_LANGUAGE'].split(',')[0]
     from django.utils.translation import  activate,to_locale
     g_blog.language=to_locale(lang)
     g_blog.admin_essential=False
+    g_blog.allow_comments=False
     from django.conf import settings
     settings._target = None
     activate(g_blog.language)

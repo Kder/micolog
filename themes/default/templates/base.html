@@ -46,7 +46,7 @@ myBoxObject.applyCornersToAll();
 <div id="menu">
 <ul>
 		<li class="{%if ishome%}current_page_item{%else%}page_item{%endif%}" >
-			<a  href="{{ blog.baseurl }}"  >Home</a>
+			<a  href="{{ blog.baseurl }}"  >首页</a>
 		</li>
 		{{self.m_list_pages|safe}}
     <li class="page_item" ><a href="{{blog.feedurl}}">(RSS)</a></li>
@@ -97,8 +97,9 @@ myBoxObject.applyCornersToAll();
 <div id="footer">
 {%mf footer%}
 	<div class="footer">
-	    <p class="fooleft">{{blog.title}} is proudly powered by <a href="http://xuming.net">Micolog</a>. Theme by <a href="http://bob.my/" title="Simple">Bob</a></p>
-		<p class="fooright"><a href="#top" title="Top">top</a></p>
+			<p class="fooleft">{{blog.title}} 由 <a href="http://xuming.net">Micolog</a> 构建. 主题由 <a href="http://bob.my/" title="Simple">Bob</a> 提供
+		</p>
+		<p class="fooright"><a href="#top" title="Top">回页首</a></p>
 	</div>
 {%endmf%}
 </div>
