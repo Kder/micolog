@@ -1,13 +1,19 @@
 <div class="sidebar">
 <ul>
+
 <li>
-<h2>评论</h2>
-        <ul>
+	<h2>公告</h2>
+	{{blog.blognotice|safe}}
+</li>
+
+<li>
+	<h2>评论</h2>
+	<ul>
         {% for comment in recent_comments %}
         <li><a href="/{{comment.entry.link}}#comment-{{comment.key.id}}">{{comment.author}}:{{comment.shortcontent}}...</a> </li>
         {%endfor%}
-        </ul>
-        </li>
+	</ul>
+</li>
 
 <li>
  <h2>分类</h2>
